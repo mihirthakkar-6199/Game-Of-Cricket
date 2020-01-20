@@ -3,17 +3,20 @@ package com.example.trial;
 import java.util.Random;
 
 public class match {
-    private team one = new team("India");
-    private team two = new team("Australia");
-    private String toss_won;
-    private String won_action;
-    private int fir_ings;
-    private int target;
+    private team one;
+    private team two;
+    private int balls,fir_ings,target;
+    private String toss_won,won_action;
+    public match(String team1,String team2,int over){
+        one = new team(team1);
+        two = new team(team2);
+        balls = over*6;
+    }
     public String startmatch(){
-        String one_name=one.getname();
-        String two_name=two.getname();
         toss();
-        String s = "Team "+toss_won+" won the toss and have decided to "+won_action+" first.<br>\nSCORECARD<br>\n";
+        System.out.println(balls);
+        String s="<b>" + one.getname()+ " VS " +two.getname()+"</b><br>";
+        s += "Team "+toss_won+" won the toss and have decided to "+won_action+" first.<br><br>\n<b>SCORECARD</b><br>\n";
         play(1);
         play(2);
         if(fir_ings==0){
@@ -86,8 +89,8 @@ public class match {
     public void play(int inigs){
         int run=0;
         int wicket=0;
-        int ball=300;
-        for(int i=1;i<=300;i++)
+        int ball=balls;
+        for(int i=1;i<=balls;i++)
         {
             if(inigs==2 && run>target)
             {
@@ -114,12 +117,14 @@ public class match {
             target=run;
             if(fir_ings==0)
             {
+                System.out.println(ball);
                 one.setrun(run);
                 one.setball(ball);
                 one.setwicket(wicket);
             }
             else
             {
+                System.out.println(ball);
                 two.setrun(run);
                 two.setball(ball);
                 two.setwicket(wicket);
