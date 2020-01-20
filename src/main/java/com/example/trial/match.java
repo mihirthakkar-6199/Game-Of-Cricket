@@ -56,7 +56,7 @@ public class match {
                 s+=one.getname()+" won by "+rem+" wickets.<br>\n";
             }
         }
-        s+="Thanks!";
+        s+="Thanks! Bye!";
        // s="mihi"+"\n"+"harsh";
        // System.out.println(s);
        // return "mihi"+"\n"+"harsh";
