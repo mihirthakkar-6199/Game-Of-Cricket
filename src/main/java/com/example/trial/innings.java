@@ -52,7 +52,7 @@ public class innings {
                     bat.setBatsmenNoOfRuns(strikeRate1,bat.getBatsmenNoOfRuns(strikeRate1)+next);
                     bowl.setBowlerRunsGiven(currBowler,bowl.getBowlerRunsGiven(currBowler)+next);
                     bat.setrun(bat.getrun()+next);
-                    bat.setball(bat.getball()+1);
+                    //bat.setball(bat.getball()+1);
                     runs+=next;
                     if(next==4)
                         bat.setBatsmenNoOfFours(strikeRate1,bat.getBatsmenNoOfFours(strikeRate1)+1);
@@ -75,6 +75,8 @@ public class innings {
             }
         }
         target=runs;
+        bat.setball(balls);
+        bat.setOvers(find(balls));
         return new Pair<String,Integer>(s,target);
     }
     public String scoreboard(team bat,team bowl,String s)
@@ -184,5 +186,8 @@ public class innings {
         else if(ball%6==3) return (float) (ball/6+0.3);
         else if(ball%6==4) return (float) (ball/6+0.4);
         else return (float) (ball/6+0.5);
+    }
+    public ArrayList<over> getData(){
+        return data;
     }
 }

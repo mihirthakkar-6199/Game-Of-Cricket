@@ -5,13 +5,14 @@ public class team {
     private int runs=0;
     private int wickets=0;
     private int balls=0;
+    private float overs=0;
     private player[] players;
     public team(String name){
         this.name=name;
         players = new player[11];
         for(int i=0;i<11;i++)
         {
-            players[i] = new player("Player " + (i+1));
+            players[i] = new player(name+ " "+ (i+1));
         }
     }
     public String getname(){
@@ -23,18 +24,20 @@ public class team {
     public int getwicket(){
         return wickets;
     }
-    public int getball(){
-        return balls;
+    public float getOvers(){
+        return overs;
     }
-    public String getbatsmen(String s){
-        s+="Batting Scorecard<br>";
-        for(int i=0;i<11;i++){
-            s+=players[i].getName()+" "+players[i].getNoOfRuns()+" "+players[i].getNoOfBallsPlayed()+"<br>";
-        }
-        return s;
+    //public int getball(){
+    //    return balls;
+    //}
+    public player[] getPlayers(){
+        return players;
     }
     public void setrun(int runs){
         this.runs=runs;
+    }
+    public void setOvers(float overs){
+        this.overs=overs;
     }
     public void setwicket(int wickets){
         this.wickets=wickets;
