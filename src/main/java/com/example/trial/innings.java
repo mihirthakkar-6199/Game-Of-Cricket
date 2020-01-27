@@ -5,8 +5,8 @@ import java.util.Random;
 import javafx.util.Pair;
 
 public class innings {
-    private int runs=0,wickets=0,balls=0,strikeRate1=0,strikeRate2=1,currBowler=6;
-    private ArrayList<over> data = new ArrayList<>();
+    private int runs=0,wickets=0,balls=0,striker=0,nonStriker=1,currBowler=6;
+    private ArrayList<over> overData = new ArrayList<>();
     public Pair<String,Integer> startInnings(team bat,team bowl,int number,int target,int overs,String s){
         s+="<h2>Innings "+number+"</h2>";
         int flag=0;
@@ -34,39 +34,39 @@ public class innings {
                 newOver.setBallInfo(next);
                 if(next>=0 && next<=6)
                     temp+=next;
-                System.out.println(strikeRate1+" "+strikeRate2);
+                System.out.println(striker+" "+nonStriker);
                 bowl.setBowlerNoOfBallsBowled(currBowler,bowl.getBowlerNoOfBallsBowled(currBowler)+1);
-                bat.setBatsmenNoOfBallsPlayed(strikeRate1,bat.getBatsmenNoOfBallsPlayed(strikeRate1)+1);
+                bat.setBatsmenNoOfBallsPlayed(striker,bat.getBatsmenNoOfBallsPlayed(striker)+1);
                 if(next==7)
                 {
                     wickets++;
                     bat.setwicket(bat.getwicket()+1);
                     bowl.setBowlerWicketsTaken(currBowler,bowl.getBowlerWicketsTaken(currBowler)+1);
-                    if(strikeRate1>strikeRate2)
-                        strikeRate1++;
-                    else if(strikeRate1<strikeRate2)
-                        strikeRate1=strikeRate2+1;
+                    if(striker>nonStriker)
+                        striker++;
+                    else if(striker<nonStriker)
+                        striker=nonStriker+1;
                 }
                 else
                 {
-                    bat.setBatsmenNoOfRuns(strikeRate1,bat.getBatsmenNoOfRuns(strikeRate1)+next);
+                    bat.setBatsmenNoOfRuns(striker,bat.getBatsmenNoOfRuns(striker)+next);
                     bowl.setBowlerRunsGiven(currBowler,bowl.getBowlerRunsGiven(currBowler)+next);
                     bat.setrun(bat.getrun()+next);
                     //bat.setball(bat.getball()+1);
                     runs+=next;
                     if(next==4)
-                        bat.setBatsmenNoOfFours(strikeRate1,bat.getBatsmenNoOfFours(strikeRate1)+1);
+                        bat.setBatsmenNoOfFours(striker,bat.getBatsmenNoOfFours(striker)+1);
                     if(next==6)
-                        bat.setBatsmenNoOfSixes(strikeRate1,bat.getBatsmenNoOfSixes(strikeRate1)+1);
+                        bat.setBatsmenNoOfSixes(striker,bat.getBatsmenNoOfSixes(striker)+1);
                     if(next%2==1)
                     {
-                        int temp1=strikeRate2;
-                        strikeRate2=strikeRate1;
-                        strikeRate1=temp1;
+                        int temp1=nonStriker;
+                        nonStriker=striker;
+                        striker=temp1;
                     }
                 }
             }
-            data.add(newOver);
+            overData.add(newOver);
             if(temp==0)
                 bowl.setBowlerMaidenOvers(currBowler,bowl.getBowlerMaidenOvers(currBowler)+1);
             currBowler++;
@@ -187,7 +187,7 @@ public class innings {
         else if(ball%6==4) return (float) (ball/6+0.4);
         else return (float) (ball/6+0.5);
     }
-    public ArrayList<over> getData(){
-        return data;
+    public ArrayList<over> getoverData(){
+        return overData;
     }
 }

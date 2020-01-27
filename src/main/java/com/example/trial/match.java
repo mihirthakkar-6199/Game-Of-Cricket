@@ -6,15 +6,15 @@ import javafx.util.Pair;
 
 public class match {
     private int overs;
-    private String toss_won,won_action,s;
-    private team one;
-    private team two;
+    private String tossWon,wonAction,s;
+    private team teamOne;
+    private team teamTwo;
     innings firstInnings = new innings();
     innings secondInnings = new innings();
     private String result;
     public match(String team1,String team2,int over){
-        one = new team(team1);
-        two = new team(team2);
+        teamOne = new team(team1);
+        teamTwo = new team(team2);
         overs = over;
     }
     public String getResult(){
@@ -26,54 +26,54 @@ public class match {
     public innings getSecondInnings(){
         return secondInnings;
     }
-    public String getToss_won() {
-        return toss_won;
+    public String gettossWon() {
+        return tossWon;
     }
-    public String getWon_action(){
-        return won_action;
+    public String getwonAction(){
+        return wonAction;
     }
-    public team getOne(){
-        return one;
+    public team getteamOne(){
+        return teamOne;
     }
     public int getOvers(){
         return overs;
     }
-    public team gettwo(){
-        return two;
+    public team getteamTwo(){
+        return teamTwo;
     }
     public String startmatch(){
         toss();
         System.out.println(overs);
-        s="<center><h1>" + one.getname()+ " Vs " +two.getname()+"</b></h1></center>";
-        s +="<center><b>Team "+toss_won+" won the toss and have decided to "+won_action+" first.</b><br><br>\n<b>SCORECARD</b></center><br>\n";
-        Pair<String,Integer> out = firstInnings.startInnings(one,two,1,0,overs,s);
+        s="<center><h1>" + teamOne.getname()+ " Vs " +teamTwo.getname()+"</b></h1></center>";
+        s +="<center><b>Team "+tossWon+" won the toss and have decided to "+wonAction+" first.</b><br><br>\n<b>SCORECARD</b></center><br>\n";
+        Pair<String,Integer> out = firstInnings.startInnings(teamOne,teamTwo,1,0,overs,s);
         s=out.getKey();
-        s=firstInnings.scoreboard(one,two,s);
-        Pair<String,Integer> out1= secondInnings.startInnings(two,one,2,out.getValue(),overs,s);
+        s=firstInnings.scoreboard(teamOne,teamTwo,s);
+        Pair<String,Integer> out1= secondInnings.startInnings(teamTwo,teamOne,2,out.getValue(),overs,s);
         s=out1.getKey();
-        s=secondInnings.scoreboard(two,one,s);
+        s=secondInnings.scoreboard(teamTwo,teamOne,s);
         s+="<b>RESULT: ";
-        if(one.getrun()>two.getrun())
+        if(teamOne.getrun()>teamTwo.getrun())
         {
-            int rem=one.getrun()-two.getrun();
-            s+=one.getname()+" won by "+rem+" runs</b><br>\n";
-            result=one.getname()+" won by "+rem+" runs";
+            int rem=teamOne.getrun()-teamTwo.getrun();
+            s+=teamOne.getname()+" won by "+rem+" runs</b><br>\n";
+            result=teamOne.getname()+" won by "+rem+" runs";
         }
-        else if(one.getrun()==two.getrun())
+        else if(teamOne.getrun()==teamTwo.getrun())
         {
             s+="Match was a tie!</b><br>\n";
             result="Match was a tie!";
         }
         else
         {
-            int rem=10-two.getwicket();
+            int rem=10-teamTwo.getwicket();
             if(rem==1) {
-                s += two.getname() + " won by " + rem + " wicket</b><br>\n";
-                result = two.getname() + " won by " + rem + " wicket";
+                s += teamTwo.getname() + " won by " + rem + " wicket</b><br>\n";
+                result = teamTwo.getname() + " won by " + rem + " wicket";
             }
             else{
-                s += two.getname() + " won by " + rem + " wickets</b><br>\n";
-                result = two.getname() + " won by " + rem + " wickets";
+                s += teamTwo.getname() + " won by " + rem + " wickets</b><br>\n";
+                result = teamTwo.getname() + " won by " + rem + " wickets";
             }
         }
         return s;
@@ -82,20 +82,20 @@ public class match {
         Random rand = new Random();
         int won = rand.nextInt(2);
         int action =rand.nextInt(2);
-        if(won==0) toss_won=one.getname();
-        else toss_won=two.getname();
-        if(action==0) won_action="Bat";
-        else won_action="Bowl";
+        if(won==0) tossWon=teamOne.getname();
+        else tossWon=teamTwo.getname();
+        if(action==0) wonAction="Bat";
+        else wonAction="Bowl";
         if(won==0 && action==1)
         {
-            team three = new team(two.getname());
-            two = one;
-            one=three;
+            team three = new team(teamTwo.getname());
+            teamTwo = teamOne;
+            teamOne=three;
         }
         else if(won==1 && action==0){
-            team three = new team(two.getname());
-            two = one;
-            one=three;
+            team three = new team(teamTwo.getname());
+            teamTwo = teamOne;
+            teamOne=three;
         }
     }
 }

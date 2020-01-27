@@ -21,7 +21,6 @@ public class player {
     public int getNoOfSixes(){
         return noOfSixes;
     }
-
     public int getNoOfBallsBowled(){
         return noOfBallsBowled;
     }
