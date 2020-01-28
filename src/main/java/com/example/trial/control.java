@@ -32,11 +32,11 @@ public class control {
     }
     @GetMapping("/new")
     @ResponseBody
-    public String index1(@RequestParam(name="team1") String team1,@RequestParam(name="team2") String team2,@RequestParam(name="over") String over)
+    public match index1(@RequestParam(name="team1") String team1,@RequestParam(name="team2") String team2,@RequestParam(name="over") String over)
     {
         match m = new match(team1,team2,Integer.parseInt(over));
-        String r = m.startmatch();
-        System.out.println(r);
-        return r;
+        m.startMatch();
+        //System.out.println(r);
+        return m;
     }
 }

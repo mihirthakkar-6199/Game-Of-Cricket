@@ -5,86 +5,103 @@ import java.util.Random;
 public class match {
     private team one;
     private team two;
-    private int balls,fir_ings,target;
-    private String toss_won,won_action;
+    private int balls,firInigs,target,totalOvers;
+    private String tossWon,wonAction,result;
     public match(String team1,String team2,int over){
         one = new team(team1);
         two = new team(team2);
         balls = over*6;
+        totalOvers=over;
     }
-    public String startmatch(){
+    public team getOne(){
+        return one;
+    }
+    public team getTwo(){
+        return two;
+    }
+    public int getTotalOvers(){
+        return totalOvers;
+    }
+    public String getTossWon(){
+        return tossWon;
+    }
+    public String getWonAction(){
+        return wonAction;
+    }
+    public String getResult(){
+        return result;
+    }
+    public void startMatch(){
         toss();
         System.out.println(balls);
-        String s="<b>" + one.getname()+ " VS " +two.getname()+"</b><br>";
-        s += "Team "+toss_won+" won the toss and have decided to "+won_action+" first.<br><br>\n<b>SCORECARD</b><br>\n";
+        //String s="<b>" + one.getname()+ " VS " +two.getname()+"</b><br>";
+        //s += "Team "+tossWon+" won the toss and have decided to "+wonAction+" first.<br><br>\n<b>SCORECARD</b><br>\n";
         play(1);
         play(2);
-        if(fir_ings==0){
-            float over_fir=find(one.getball());
-            s+=one.getname()+" : "+one.getrun()+"/"+one.getwicket()+"("+over_fir+")<br>\n";
-            float over_sec =find(two.getball());
-            s+=two.getname()+" : "+two.getrun()+"/"+two.getwicket()+"("+over_sec+")<br>\n";
+        if(firInigs==0){
+           // float over_fir=find(one.getball());
+            //s+=one.getname()+" : "+one.getrun()+"/"+one.getwicket()+"("+over_fir+")<br>\n";
+           // float over_sec =find(two.getball());
+           // s+=two.getname()+" : "+two.getrun()+"/"+two.getwicket()+"("+over_sec+")<br>\n";
             if(one.getrun()>two.getrun())
             {
                 int rem=one.getrun()-two.getrun();
-                s+=one.getname()+" won by "+rem+" runs.<br>\n";
+             //   s+=one.getname()+" won by "+rem+" runs.<br>\n";
+                result=one.getname()+" won by "+rem+" runs";
             }
             else if(one.getrun()==two.getrun())
             {
-                s+="Match was a tie!<br>\n";
+                //s+="Match was a tie!<br>\n";
+                result="Match was a tie!";
             }
             else
             {
                 int rem=10-two.getwicket();
-                s+=two.getname()+" won by "+rem+" wickets.<br>\n";
+            //    s+=two.getname()+" won by "+rem+" wickets.<br>\n";
+                result=two.getname()+" won by "+rem+" wickets";
             }
         }
         else{
-            float over_fir=find(two.getball());
-            s+=two.getname()+" : "+two.getrun()+"/"+two.getwicket()+"("+over_fir+")<br>\n";
-            float over_sec =find(one.getball());
-            s+=one.getname()+" : "+one.getrun()+"/"+one.getwicket()+"("+over_sec+")<br>\n";
+        //    float over_fir=find(two.getball());
+         //   s+=two.getname()+" : "+two.getrun()+"/"+two.getwicket()+"("+over_fir+")<br>\n";
+          //  float over_sec =find(one.getball());
+           // s+=one.getname()+" : "+one.getrun()+"/"+one.getwicket()+"("+over_sec+")<br>\n";
             if(two.getrun()>one.getrun())
             {
                 int rem=two.getrun()-one.getrun();
-                s+=two.getname()+" won by "+rem+" runs.<br>\n";
+                //s+=two.getname()+" won by "+rem+" runs.<br>\n";
+                result=two.getname()+" won by "+rem+" runs";
             }
             else if(one.getrun()==two.getrun())
             {
-                s+="Match was a tie!<br>\n";
+                //s+="Match was a tie!<br>\n";
+                result="Match was a tie!";
             }
             else
             {
                 int rem=10-one.getwicket();
-                s+=one.getname()+" won by "+rem+" wickets.<br>\n";
+                //s+=one.getname()+" won by "+rem+" wickets.<br>\n";
+                result=one.getname()+" won by "+rem+" wickets";
             }
         }
-        s+="Thanks! Bye!";
+        //s+="Thanks! Bye!";
        // s="mihi"+"\n"+"harsh";
        // System.out.println(s);
        // return "mihi"+"\n"+"harsh";
-        return s;
-    }
-    public float find(int ball){
-        if(ball%6==0) return ball/6;
-        else if(ball%6==1) return (float) (ball/6+0.1);
-        else if(ball%6==2) return (float) (ball/6+0.2);
-        else if(ball%6==3) return (float) (ball/6+0.3);
-        else if(ball%6==4) return (float) (ball/6+0.4);
-        else return (float) (ball/6+0.5);
+      //  return this;
     }
     public void toss(){
         Random rand = new Random();
         int won = rand.nextInt(2);
         int action =rand.nextInt(2);
-        if(won==0) toss_won=one.getname();
-        else toss_won=two.getname();
-        if(action==0) won_action="Bat";
-        else won_action="Bowl";
-        if(won==0 && action==0) fir_ings=0;
-        else if(won==0 && action==1) fir_ings=1;
-        else if(won==1 && action==0) fir_ings=1;
-        else fir_ings=0;
+        if(won==0) tossWon=one.getname();
+        else tossWon=two.getname();
+        if(action==0) wonAction="Bat";
+        else wonAction="Bowl";
+        if(won==0 && action==0) firInigs=0;
+        else if(won==0 && action==1) firInigs=1;
+        else if(won==1 && action==0) firInigs=1;
+        else firInigs=0;
     }
     public void play(int inigs){
         int run=0;
@@ -115,7 +132,7 @@ public class match {
         }
         if(inigs==1){
             target=run;
-            if(fir_ings==0)
+            if(firInigs==0)
             {
                 System.out.println(ball);
                 one.setrun(run);
@@ -131,7 +148,7 @@ public class match {
             }
         }
         if(inigs==2){
-            if(fir_ings==0)
+            if(firInigs==0)
             {
                 two.setrun(run);
                 two.setball(ball);
