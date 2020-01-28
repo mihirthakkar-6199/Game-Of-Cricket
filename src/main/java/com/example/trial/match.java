@@ -33,7 +33,7 @@ public class match {
     }
     public void startMatch(){
         toss();
-        System.out.println(balls);
+       // System.out.println(balls);
         //String s="<b>" + one.getname()+ " VS " +two.getname()+"</b><br>";
         //s += "Team "+tossWon+" won the toss and have decided to "+wonAction+" first.<br><br>\n<b>SCORECARD</b><br>\n";
         play(1);
@@ -134,14 +134,14 @@ public class match {
             target=run;
             if(firInigs==0)
             {
-                System.out.println(ball);
+               // System.out.println(ball);
                 one.setrun(run);
                 one.setball(ball);
                 one.setwicket(wicket);
             }
             else
             {
-                System.out.println(ball);
+               // System.out.println(ball);
                 two.setrun(run);
                 two.setball(ball);
                 two.setwicket(wicket);
