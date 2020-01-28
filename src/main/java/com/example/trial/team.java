@@ -1,5 +1,10 @@
 package com.example.trial;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class team {
     private String name;
     private int runs=0;
@@ -10,9 +15,36 @@ public class team {
     public team(String name){
         this.name=name;
         players = new player[11];
+        List<Integer> temp = new ArrayList<>();
+        double next;
         for(int i=0;i<11;i++)
         {
             players[i] = new player(name+ " "+ (i+1));
+        }
+        //The first 6 players of both teams are batsmen and their batting rating will be between 80 and 100
+        //Generate 6 numbers between 80 and 100 and then sort it in descending order,ie, the first batsman will get the highest rating
+        for(int i=0;i<6;i++){
+            players[i].setType(PlayerType.Batsman);
+            next=Math.random();
+            next=next*20+80;
+            temp.add((int)next);
+        }
+        Collections.sort(temp,Collections.reverseOrder());
+        for(int i=0;i<6;i++){
+            players[i].setBattingRating(temp.get(i));
+        }
+        //The next 5 players of both the teams are bowlers and their batting rating will be between 60 and 80
+        //Generate 5 numbers between 60 and 80 and then sort it in descending order,ie, the 7th batsman will get the highest rating
+        temp.clear();
+        for(int i=6;i<11;i++){
+            players[i].setType(PlayerType.Bowler);
+            next=Math.random();
+            next=next*20+60;
+            temp.add((int)next);
+        }
+        Collections.sort(temp,Collections.reverseOrder());
+        for(int i=6;i<11;i++){
+            players[i].setBattingRating(temp.get(i-6));
         }
     }
     public String getname(){
@@ -56,6 +88,10 @@ public class team {
     }
     public int getBatsmenNoOfRuns(int index){
         return players[index].getNoOfRuns();
+    }
+
+    public int getBatsmenBattingRating(int index){
+        return players[index].getBattingRating();
     }
 
     public void setBatsmenNoOfBallsPlayed(int index,int ball){

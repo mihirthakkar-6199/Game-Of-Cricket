@@ -1,13 +1,23 @@
 package com.example.trial;
 
+enum PlayerType{
+    Batsman,Bowler;
+}
 public class player {
     private String name;
-    private int noOfRuns=0,noOfBallsPlayed=0,noOfFours=0,noOfSixes=0,noOfBallsBowled=0,runsGiven=0,wicketsTaken=0,maidenOvers=0;
+    private int noOfRuns=0,noOfBallsPlayed=0,noOfFours=0,noOfSixes=0,noOfBallsBowled=0,runsGiven=0,wicketsTaken=0,maidenOvers=0,battingRating;
+    private PlayerType type;
     public player(String name){
         this.name=name;
     }
     public String getName(){
         return name;
+    }
+    public PlayerType getType(){
+        return type;
+    }
+    public int getBattingRating(){
+        return battingRating;
     }
     public int getNoOfRuns(){
         return noOfRuns;
@@ -33,6 +43,9 @@ public class player {
     public int getMaidenOvers(){
         return maidenOvers;
     }
+    public void setBattingRating(int battingRating){
+        this.battingRating=battingRating;
+    }
     public void setNoOfRuns(int noOfRuns){
         this.noOfRuns=noOfRuns;
     }
@@ -56,5 +69,8 @@ public class player {
     }
     public void setMaidenOvers(int maidenOvers){
         this.maidenOvers=maidenOvers;
+    }
+    public void setType(PlayerType type){
+        this.type=type;
     }
 }

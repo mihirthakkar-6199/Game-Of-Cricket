@@ -28,8 +28,18 @@ public class innings {
                     flag=1;
                     break;
                 }
-                Random rand = new Random();
-                int next = rand.nextInt(8);
+                //Generate a random number between 0 and 100. If the number is greater than the batting rating of the player, then the
+                //player is out. Otherwise another random number is generated which is equally distributed between 0 and 6, which adds
+                //this number of runs to the player
+                double prob=Math.random()*100;
+                int next;
+                if(prob>bat.getBatsmenBattingRating(striker)){
+                    next=7;
+                }
+                else{
+                    Random rand = new Random();
+                    next = rand.nextInt(7);
+                }
                 balls++;
                 newOver.setBallInfo(next);
                 if(next>=0 && next<=6)
