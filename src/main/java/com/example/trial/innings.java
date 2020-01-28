@@ -7,10 +7,10 @@ import javafx.util.Pair;
 public class innings {
     private int runs=0,wickets=0,balls=0,striker=0,nonStriker=1,currBowler=6;
     private ArrayList<over> overData = new ArrayList<>();
-    public Pair<String,Integer> startInnings(team bat,team bowl,int number,int target,int overs,String s){
-        s+="<h2>Innings "+number+"</h2>";
+    public Integer startInnings(team bat,team bowl,int number,int target,int overs){
+       // s+="<h2>Innings "+number+"</h2>";
         int flag=0;
-        System.out.println("Start");
+        //System.out.println("Start");
         for(int i=1;i<=overs;i++)
         {
             over newOver = new over();
@@ -34,7 +34,7 @@ public class innings {
                 newOver.setBallInfo(next);
                 if(next>=0 && next<=6)
                     temp+=next;
-                System.out.println(striker+" "+nonStriker);
+               // System.out.println(striker+" "+nonStriker);
                 bowl.setBowlerNoOfBallsBowled(currBowler,bowl.getBowlerNoOfBallsBowled(currBowler)+1);
                 bat.setBatsmenNoOfBallsPlayed(striker,bat.getBatsmenNoOfBallsPlayed(striker)+1);
                 if(next==7)
@@ -77,9 +77,20 @@ public class innings {
         target=runs;
         bat.setball(balls);
         bat.setOvers(find(balls));
-        return new Pair<String,Integer>(s,target);
+        return target;
     }
-    public String scoreboard(team bat,team bowl,String s)
+    public float find(int ball){
+        if(ball%6==0) return ball/6;
+        else if(ball%6==1) return (float) (ball/6+0.1);
+        else if(ball%6==2) return (float) (ball/6+0.2);
+        else if(ball%6==3) return (float) (ball/6+0.3);
+        else if(ball%6==4) return (float) (ball/6+0.4);
+        else return (float) (ball/6+0.5);
+    }
+    public ArrayList<over> getoverData(){
+        return overData;
+    }
+   /* public String scoreboard(team bat,team bowl,String s)
     {
         s+="<h3>"+bat.getname()+" Batting Scorecard</h3>";
         s+="<b>Total:"+runs+"/"+wickets+"("+find(balls)+")</b><br><br>";
@@ -178,16 +189,5 @@ public class innings {
                 "</body>\n" +
                 "</html><br>";
         return s;
-    }
-    public float find(int ball){
-        if(ball%6==0) return ball/6;
-        else if(ball%6==1) return (float) (ball/6+0.1);
-        else if(ball%6==2) return (float) (ball/6+0.2);
-        else if(ball%6==3) return (float) (ball/6+0.3);
-        else if(ball%6==4) return (float) (ball/6+0.4);
-        else return (float) (ball/6+0.5);
-    }
-    public ArrayList<over> getoverData(){
-        return overData;
-    }
+    }*/
 }
