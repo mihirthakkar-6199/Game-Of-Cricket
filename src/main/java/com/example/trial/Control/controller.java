@@ -1,9 +1,13 @@
-package com.example.trial;
+package com.example.trial.Control;
 
+import com.example.trial.Service.GameService;
+import com.example.trial.Service.CricketService;
+import com.example.trial.Beans.match;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class control {
+public class controller {
+    private GameService cricketService = new CricketService();
     @RequestMapping("/")
     public String index(){
         String fin="<html>\n" +
@@ -32,11 +36,9 @@ public class control {
     }
     @GetMapping("/new")
     @ResponseBody
-    public match index1(@RequestParam(name="team1") String team1,@RequestParam(name="team2") String team2,@RequestParam(name="over") String over)
+    public match index1(@RequestParam(name="team1") String team1, @RequestParam(name="team2") String team2, @RequestParam(name="over") String over)
     {
-        match m = new match(team1,team2,Integer.parseInt(over));
-        m.startMatch();
-        //System.out.println(r);
-        return m;
+        return cricketService.start(team1,team2,Integer.parseInt(over));
     }
+
 }
