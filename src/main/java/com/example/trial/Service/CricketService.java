@@ -170,10 +170,12 @@ public class CricketService implements GameService {
         inning.setWickets(inning.getWickets()+1);
         inning.getBatting().setWickets(inning.getBatting().getWickets()+1);
         inning.getBowling().setBowlerWicketsTaken(inning.getCurrBowler(),inning.getBowling().getBowlerWicketsTaken(inning.getCurrBowler())+1);
-        if(inning.getStriker()>inning.getNonStriker())
-            inning.setStriker(inning.getStriker()+1);
-        else if(inning.getStriker()<inning.getNonStriker())
-            inning.setStriker(inning.getNonStriker()+1);
+        if(inning.getWickets()!=10) {
+            if (inning.getStriker() > inning.getNonStriker())
+                inning.setStriker(inning.getStriker() + 1);
+            else if (inning.getStriker() < inning.getNonStriker())
+                inning.setStriker(inning.getNonStriker() + 1);
+        }
     }
     public void run(innings inning,int next){
         inning.getBatting().setBatsmenNoOfRuns(inning.getStriker(),inning.getBatting().getBatsmenNoOfRuns(inning.getStriker())+next);

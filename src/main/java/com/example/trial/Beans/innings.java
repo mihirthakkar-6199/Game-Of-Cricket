@@ -10,7 +10,7 @@ import java.util.Random;
 @Setter
 public class innings {
     private team batting, bowling;
-    private int runs, wickets, balls, striker, nonStriker, currBowler, inningsNumber, target;
+    private int runs, wickets, balls, striker=0, nonStriker=1, currBowler, inningsNumber, target;
     private ArrayList<over> overData = new ArrayList<>();
 
     public void addOver(over newOver) {
